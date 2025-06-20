@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Children's Story Generator</title>
+</head>
+<body>
+  <h1>Children's Story Generator</h1>
+  <p id="story">Click the button to create a story!</p>
+  <button onclick="generateStory()">Generate Story</button>
+
+  <script>
+    const characters = ["a clever fox", "a brave rabbit", "a sleepy bear", "a curious cat"];
+    const places = ["in the forest", "on the mountain", "by the river", "under the stars"];
+    const actions = ["found a treasure", "helped a friend", "solved a mystery", "learned something new"];
+
+    function generateStory() {
+      const character = characters[Math.floor(Math.random() * characters.length)];
+      const place = places[Math.floor(Math.random() * places.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+      const story = `One day, ${character} ${action} ${place}.`;
+      document.getElementById("story").innerText = story;
+    }
+  </script>
+</body>
+</html>
