@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Story Generator</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 20px; background: #fef7ec; }
+    img { width: 200px; height: auto; margin: 20px; }
+    button { padding: 10px 20px; font-size: 16px; margin: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Generador de Cuentos Infantiles</h1>
+  <p id="story">Haz clic en el botón para crear un cuento.</p>
+  <img id="storyImage" src="" alt="" style="display: none;">
+  <br>
+  <button onclick="generateStory()">Generar Cuento</button>
+  <button onclick="readStory()">🔊 Leer en Voz Alta</button>
+
+  <script>
+    const characters = [
+      { en: "a clever fox", es: "un zorro astuto", img: "https://i.imgur.com/hz2Bl7X.png" },
+      { en: "a brave rabbit", es: "un conejo valiente", img: "https://i.imgur.com/yZKXsV9.png" },
+      { en: "a sleepy bear", es: "un oso dormilón", img: "https://i.imgur.com/7FluJdb.png" },
+      { en: "a curious cat", es: "un gato curioso", img: "https://i.imgur.com/OY4kUML.png" }
+    ];
+
+    const places = [
+      { en: "in the forest", es: "en el bosque" },
+      { en: "on the mountain", es: "en la montaña" },
+      { en: "by the river", es: "junto al río" },
+      { en: "under the stars", es: "bajo las estrellas" }
+    ];
+
+    const actions = [
+      { en: "found a treasure", es: "encontró un tesoro" },
+      { en: "helped a friend", es: "ayudó a un amigo" },
+      { en: "solved a mystery", es: "resolvió un misterio" },
+      { en: "learned something new", es: "aprendió algo nuevo" }
+    ];
+
+    let currentStory = "";
+
+    function generateStory() {
+      const char = characters[Math.floor(Math.random() * characters.length)];
+      const place = places[Math.floor(Math.random() * places.length)];
+      const action = actions[Math.floor(Math.random() * actions.length)];
+
+      const storyEn = `One day, ${char.en} ${action.en} ${place.en}.`;
+      const storyEs = `Un día, ${char.es} ${action.es} ${place.es}.`;
+
+      currentStory = storyEn + " " + storyEs;
+
+      document.getElementById("story").innerText = storyEn + "\n" + storyEs;
+      const image = document.getElementById("storyImage");
+      image.src = char.img;
+      image.alt = char.en;
+      image.style.display = "block";
+    }
+
+    function readStory() {
+      const utterance = new SpeechSynthesisUtterance(currentStory);
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>
